@@ -10,7 +10,7 @@ class GameManager
     public:
         GameManager();
         ~GameManager();
-        const Board* getBoard() const;
-        const TurnManager* getTurnManager() const;
+        Board* getBoard();
+        TurnManager* getTurnManager();
 };
 

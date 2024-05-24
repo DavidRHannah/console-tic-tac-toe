@@ -11,27 +11,27 @@ void OutputFormatter::outputBoard(const Board* b) const
     for (int row = 0; row < 3; row++)
     {
         for (int col = 0; col < 3; col++) 
-        {
-            std::cout << b->getMarker(row, col);
+        { 
+            std::cout << b->getMarker(row, col) << "     ";
         }
-        std::cout << std::endl;
+        std::cout << std::endl << std::endl;
     }
 }
 
 void OutputFormatter::clear() const
 {
-    std::system("CLS");
+    std::system("clear");
 }
 
-void OutputFormatter::outputGame(const GameManager* gm) const 
+void OutputFormatter::outputGame(GameManager* gm) 
 {
-    const Board* board = gm->getBoard();
-    const TurnManager* turnManager = gm->getTurnManager();
+    Board* board = gm->getBoard();
+    TurnManager* turnManager = gm->getTurnManager();
     
     this->clear();
     
-    std::cout << "_______" << std::endl;
-    this->outputTurnInfo(turnManager);
+    std::cout << "=============" << std::endl;
     this->outputBoard(board);
-    std::cout << "_______" << std::endl;
+    this->outputTurnInfo(turnManager);
+    std::cout << "=============" << std::endl;
 }

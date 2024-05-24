@@ -10,11 +10,11 @@ GameManager::~GameManager()
     delete this->mGameBoard;
     delete this->mTurnManager;
 }
-const Board* GameManager::getBoard() const
+Board* GameManager::getBoard()
 {
     return this->mGameBoard;
 }
-const TurnManager* GameManager::getTurnManager() const
+TurnManager* GameManager::getTurnManager()
 {
     return this->mTurnManager;
 }      
