@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include "gameManager.h"
+#include "stateManager.h"
 
 class OutputFormatter
 {
@@ -9,6 +9,6 @@ class OutputFormatter
         void outputBoard(const Board* b) const;
         void clear() const;
     public:
-        void outputGame(GameManager* gm);
+        void outputGame(StateManager* sm);
 };
 

@@ -4,18 +4,52 @@ Game::Game()
 {
     this->mInputValidator = new InputValidator();
     this->mOutputFormatter = new OutputFormatter();
-    this->mGameManager = new GameManager();
+    this->mStateManager = new StateManager();
 }
 Game::~Game()
 {
-    delete this->mGameManager;
+    delete this->mStateManager;
+    delete this->mOutputFormatter;
+    delete this->mStateManager;
 }
 void Game::start() 
 {
     std::cout << "Game has begun!" << std::endl;
-    mGameManager->getBoard()->mark(1,1,'O');
-    mGameManager->getTurnManager()->incrementTurn();
-    mGameManager->getBoard()->mark(1,2,'X');
-    mGameManager->getTurnManager()->incrementTurn();
-    mOutputFormatter->outputGame(this->mGameManager);
+    while (mStateManager->isRunning())
+    {
+        // Output game board
+        mOutputFormatter->outputGame(this->mStateManager);
+
+        // Ask for input
+        int x = 0, 
+            y = 0;
+        std::cout << "Make a move (row, col): ";
+        std::cin >> x >> y;
+        bool validCoordinates = false;
+        if (!mStateManager->getBoard()->isMarked(x,y))
+        {
+            validCoordinates = true;
+        }
+        while (!validCoordinates) {
+            std::cout << "Enter valid row and column (i.e.\"1 1\"): ";
+            std::cin >> x >> y;
+            if (!mStateManager->getBoard()->isMarked(x,y))
+            {
+                validCoordinates = true;
+            }
+            std::cout << std::endl;
+        }
+
+        // Validate input
+
+        // Update board
+        char currentPlayerCharacter = mStateManager->getTurnManager()->getPlayer();
+        mStateManager->getBoard()->mark(x, y, currentPlayerCharacter);
+
+        // Update turn manager
+        mStateManager->getTurnManager()->incrementTurn();
+
+        // Check for win or draw
+
+    }   
 }

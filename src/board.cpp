@@ -10,25 +10,44 @@ Board::Board()
         }
     }
 }
-void Board::mark(unsigned int row, unsigned int col, char marker)
+bool Board::mark(unsigned int row, unsigned int col, char marker)
+{
+    if (row > 2 || col > 2) 
+    {
+        throw std::invalid_argument("Invalid row and/or column value");
+        return false;
+    }
+    if (toupper(marker) != 'O' && toupper(marker) != 'X')
+    {
+        throw std::invalid_argument("Invalid marker value");
+        return false;
+    }
+    if (getMarker(row, col) != '-')
+    {
+        throw std::invalid_argument("Previously marked point");
+        return false;
+    }
+    else
+    {
+        this->mBoard[row][col] = marker;
+        return true;
+    }
+}
+
+bool Board::isMarked(unsigned int row, unsigned int col) const
 {
     if (row > 2 || col > 2) 
     {
         throw std::invalid_argument("Invalid row and/or column value");
     }
-    if (toupper(marker) != 'O' && toupper(marker) != 'X')
+    if (this->mBoard[row][col] == 'O' || this->mBoard[row][col] == 'X') 
     {
-        throw std::invalid_argument("Invalid marker value");
+        return true;
     }
-    if (getMarker(row, col) != '-')
-    {
-        throw std::invalid_argument("Previously marked point");
-    }
-    else
-    {
-        this->mBoard[row][col] = marker;
-    }
+    
+    return false;
 }
+
 char Board::getMarker(unsigned int row, unsigned int col) const
 {
     if (row > 2 || col > 2) 

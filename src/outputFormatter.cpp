@@ -23,10 +23,10 @@ void OutputFormatter::clear() const
     std::system("clear");
 }
 
-void OutputFormatter::outputGame(GameManager* gm) 
+void OutputFormatter::outputGame(StateManager* sm) 
 {
-    Board* board = gm->getBoard();
-    TurnManager* turnManager = gm->getTurnManager();
+    Board* board = sm->getBoard();
+    TurnManager* turnManager = sm->getTurnManager();
     
     this->clear();
     

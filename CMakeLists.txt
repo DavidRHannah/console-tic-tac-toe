@@ -3,11 +3,11 @@ project(console-tic-tac-toe)
 
 add_subdirectory(test)
 add_executable( main 
-src/main.cpp
-src/board.cpp
-src/game.cpp
-src/inputValidator.cpp
-src/gameManager.cpp
-src/turnManager.cpp
-src/outputFormatter.cpp
+                src/main.cpp
+                src/board.cpp
+                src/game.cpp
+                src/inputValidator.cpp
+                src/outputFormatter.cpp
+                src/stateManager.cpp
+                src/turnManager.cpp
 )

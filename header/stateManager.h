@@ -2,15 +2,18 @@
 #include "board.h"
 #include "turnManager.h"
 
-class GameManager
+class StateManager
 {
     private:
         Board*          mGameBoard;
         TurnManager*    mTurnManager;
+        bool            mRunning;
     public:
-        GameManager();
-        ~GameManager();
+        StateManager();
+        ~StateManager();
         Board* getBoard();
         TurnManager* getTurnManager();
+        void updateRunningStatus(bool status);
+        bool isRunning() const;
 };
 
