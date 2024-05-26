@@ -19,34 +19,29 @@ void Game::start()
         // Output game board
         mOutputFormatter->outputGame(this->mStateManager);
 
-        // Ask for input
+        // Receive and validate input
         int x = 0, 
             y = 0;
         std::cout << "Make a move (row, col): ";
         std::cin >> x >> y;
-        bool validCoordinates = false;
-        if (!mStateManager->getBoard()->isMarked(x,y))
+        bool isValidInput = mInputValidator->validateInput(x,y, mStateManager->getBoard());
+        if (!isValidInput)
         {
-            validCoordinates = true;
+            std::cout << "Make a move: ";
         }
-        while (!validCoordinates) 
+        while (!isValidInput) 
         {
-            std::cout << "Enter valid row and column (i.e.\"1 1\"): ";
             std::cin >> x >> y;
-            if (!mStateManager->getBoard()->isMarked(x,y))
+            isValidInput = mInputValidator->validateInput(x,y, mStateManager->getBoard());
+            if (!isValidInput)
             {
-                validCoordinates = true;
+                std::cout << "Make a move: ";
             }
-            std::cout << std::endl;
         }
 
-        // Validate input
-
-        // Update board
+        // Update board state
         char currentPlayerCharacter = mStateManager->getTurnManager()->getPlayer();
         mStateManager->getBoard()->mark(x, y, currentPlayerCharacter);
-        
-        
         
         // Check for win or draw
         mStateManager->getGameOver()->updateGameState(mStateManager->getBoard(), mStateManager->getTurnManager());

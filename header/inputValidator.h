@@ -1,11 +1,9 @@
 #pragma once
-#include <string>
+#include <iostream>
+#include "board.h"
 
 class InputValidator
 {
-    public: 
-        InputValidator() {};
-        // InputValidator(const std::string& input, std::string& output);
-        // void validateInput(const std::string& input, std::string& output);
+    public:
+        bool validateInput(int x, int y, Board* board);
 };
-
