@@ -6,7 +6,7 @@ Board::Board()
     {
         for (int col = 0; col < 3; col++) 
         {
-            this->mBoard[row][col] = '-';
+            this->mBoard[row][col] = ' ';
         }
     }
 }
@@ -22,7 +22,7 @@ bool Board::mark(unsigned int row, unsigned int col, char marker)
         throw std::invalid_argument("Invalid marker value");
         return false;
     }
-    if (getMarker(row, col) != '-')
+    if (getMarker(row, col) != ' ')
     {
         throw std::invalid_argument("Previously marked point");
         return false;

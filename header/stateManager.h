@@ -1,19 +1,20 @@
 #pragma once
 #include "board.h"
 #include "turnManager.h"
+#include "gameOver.h"
 
 class StateManager
 {
     private:
         Board*          mGameBoard;
         TurnManager*    mTurnManager;
-        bool            mRunning;
+        GameOver*       mGameOver;
     public:
         StateManager();
         ~StateManager();
         Board* getBoard();
         TurnManager* getTurnManager();
-        void updateRunningStatus(bool status);
+        GameOver* getGameOver();
         bool isRunning() const;
 };
 

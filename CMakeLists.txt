@@ -10,4 +10,5 @@ add_executable( main
                 src/outputFormatter.cpp
                 src/stateManager.cpp
                 src/turnManager.cpp
+                src/gameOver.cpp
 )

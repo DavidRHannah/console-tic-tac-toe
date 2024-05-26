@@ -12,8 +12,12 @@ void OutputFormatter::outputBoard(const Board* b) const
     {
         for (int col = 0; col < 3; col++) 
         { 
-            std::cout << b->getMarker(row, col) << "     ";
+            std::cout << "  " << b->getMarker(row, col) << "  ";
+            if (col != 2)
+                std::cout << "|";
         }
+        if (row != 2)
+            std::cout << std::endl << "_________________";
         std::cout << std::endl << std::endl;
     }
 }
@@ -30,8 +34,8 @@ void OutputFormatter::outputGame(StateManager* sm)
     
     this->clear();
     
-    std::cout << "=============" << std::endl;
+    //std::cout << "===================" << std::endl;
     this->outputBoard(board);
     this->outputTurnInfo(turnManager);
-    std::cout << "=============" << std::endl;
+    //std::cout << "===================" << std::endl;
 }
