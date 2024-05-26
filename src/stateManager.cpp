@@ -4,12 +4,13 @@ StateManager::StateManager()
 {
     this->mGameBoard = new Board();
     this->mTurnManager = new TurnManager();
-    this->mRunning = true;
+    this->mGameOver = new GameOver();
 }
 StateManager::~StateManager()
 {
     delete this->mGameBoard;
     delete this->mTurnManager;
+    delete this->mGameOver;
 }
 Board* StateManager::getBoard()
 {
@@ -19,13 +20,12 @@ TurnManager* StateManager::getTurnManager()
 {
     return this->mTurnManager;
 }
-
-void StateManager::updateRunningStatus(bool status)
+GameOver* StateManager::getGameOver()
 {
-    this->mRunning = status;
+    return this->mGameOver;
 }
 
 bool StateManager::isRunning() const
 {
-    return this->mRunning;
+    return this->mGameOver->isRunning();
 }

@@ -10,11 +10,10 @@ Game::~Game()
 {
     delete this->mStateManager;
     delete this->mOutputFormatter;
-    delete this->mStateManager;
+    delete this->mInputValidator;
 }
 void Game::start() 
 {
-    std::cout << "Game has begun!" << std::endl;
     while (mStateManager->isRunning())
     {
         // Output game board
@@ -30,7 +29,8 @@ void Game::start()
         {
             validCoordinates = true;
         }
-        while (!validCoordinates) {
+        while (!validCoordinates) 
+        {
             std::cout << "Enter valid row and column (i.e.\"1 1\"): ";
             std::cin >> x >> y;
             if (!mStateManager->getBoard()->isMarked(x,y))
@@ -45,11 +45,26 @@ void Game::start()
         // Update board
         char currentPlayerCharacter = mStateManager->getTurnManager()->getPlayer();
         mStateManager->getBoard()->mark(x, y, currentPlayerCharacter);
+        
+        
+        
+        // Check for win or draw
+        mStateManager->getGameOver()->updateGameState(mStateManager->getBoard(), mStateManager->getTurnManager());
+
+        if (!mStateManager->getGameOver()->isRunning())
+        {
+            mOutputFormatter->outputGame(this->mStateManager);
+            if (mStateManager->getGameOver()->getWinner() != ' ')
+            {
+                std::cout << "Player " << mStateManager->getGameOver()->getWinner() << " wins!" << std::endl;
+            }
+            else
+            {
+                std::cout << "It's a draw!" << std::endl;
+            }
+        }
 
         // Update turn manager
         mStateManager->getTurnManager()->incrementTurn();
-
-        // Check for win or draw
-
     }   
 }
